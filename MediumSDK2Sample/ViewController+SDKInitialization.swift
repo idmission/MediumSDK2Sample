@@ -38,7 +38,7 @@ extension ViewController {
                 self.displayAlert(title: "Error", Message: "SDK initialization credentials are not correct")
             } else {
                 print("!!! initialize SDK SUCCESS")
-                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
+//                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
             }
         }
         
@@ -64,7 +64,6 @@ extension ViewController: InitializationDelegate {
             case .searchCompanyTemplateDetails: print("Template Download Status :", stage_state_Value)
             case .passiveFaceTrainingModelLabel: print("FaceModel Download Status :", stage_state_Value)
             case .idCaptureTrainingModelLabel: print("IDCaptureModel Download Status :", stage_state_Value)
-            case .classifierTrainingModelLabel: print("ClassificationModel Download Status :", stage_state_Value)
             case .faceMaskTrainingModelLabel: print("FaceMaskModel Download Status :", stage_state_Value)
             case .docDetectionTrainingModelLabel: print("DocDetectModel Download Status :", stage_state_Value)
             case .fingerprintDetectionTrainingModelLabel: print("FingerPrintModel Download Status :", stage_state_Value)

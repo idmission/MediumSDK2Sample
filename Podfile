@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '15.6'
 
 target 'MediumSDK2Sample' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,7 +7,7 @@ target 'MediumSDK2Sample' do
 
   # Pods for MediumSDK2Sample
     pod 'IDentityMediumSDK2.0'
-    pod 'IDentityMediumModels'      
+    pod 'IDentityMediumModels'
     pod 'TensorFlowLiteSwift', '~> 2.7.0'
     pod 'GoogleMLKit/TextRecognition'
     pod 'GoogleMLKit/FaceDetection'
@@ -33,3 +33,18 @@ post_install do |installer|
         end
     end
 end
+
+# install! 'cocoapods',
+#   :git => {
+#     :shallow_clone => false
+#   }
+
+# platform :ios, '12.0'
+# use_frameworks!
+
+# target 'YourAppTargetName' do
+#   # Example of your private pod
+#   pod 'IDentityMediumSDK2.0', :git => 'https://gitlab.idmission.com/apps/sdk2.0/ios/cocoapods/identitymediumsdk2.0.git', :tag => '10.1.16.2.2'
+#   pod 'IDentityMediumModels', :git => 'https://gitlab.idmission.com/apps/sdk2.0/ios/cocoapods/identitymediumsdk2.0.git', :tag => '10.1.16.2.2'
+#   # Add other dependencies here
+# end
