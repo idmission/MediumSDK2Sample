@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '15.6'
+ platform :ios, '15.5'
 
 target 'MediumSDK2Sample' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -8,9 +8,7 @@ target 'MediumSDK2Sample' do
   # Pods for MediumSDK2Sample
     pod 'IDentityMediumSDK2.0'
     pod 'IDentityMediumModels'
-    pod 'TensorFlowLiteSwift', '~> 2.7.0'
     pod 'GoogleMLKit/TextRecognition'
-    pod 'GoogleMLKit/FaceDetection'
     pod 'GZIP'
 
 end
