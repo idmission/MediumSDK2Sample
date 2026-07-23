@@ -29,16 +29,16 @@ extension ViewController {
         SDKCustomization()
         
         //2. initialize SDK
-        IDentitySDK.delegate = self
+//        IDentitySDK.delegate = self
         IDentitySDK.apiBaseUrl = apiBaseUrl
         IDentitySDK.initializeSDK(accessToken: generatedToken) { error in
+            self.activityIndicator.stopAnimating()
             if let error = error {
-                self.activityIndicator.stopAnimating()
                 print("!!! initialize SDK ERROR: \(error.localizedDescription)")
                 self.displayAlert(title: "Error", Message: "SDK initialization credentials are not correct")
             } else {
                 print("!!! initialize SDK SUCCESS")
-//                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
+                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
             }
         }
         
@@ -53,83 +53,83 @@ extension ViewController {
     }
 }
 
-extension ViewController: InitializationDelegate {
-    func updateInitialization(stage: IDentityMediumSDK.InitializationStage, state: IDentityMediumSDK.InitializationState) {
-                
-        //1. Debug-Purpose : Just to print information in logs
-        let stage_state_Value = "\(stage.rawValue) \(state.rawValue)"
-        switch stage {
-        case .login:
-            print("Login Status :", stage_state_Value)
-            
-        case .getXsltData:
-            print("XSLT Download Status :", stage_state_Value)
-            
-        case .searchCompanyTemplateDetails:
-            print("Template Download Status :", stage_state_Value)
-            
-        case .passiveFaceTrainingModelLabel:
-            print("PassiveFaceModel Download Status :", stage_state_Value)
-            
-        case .focusFaceTrainingModelLabel:
-            print("FaceFocusModel Download Status :", stage_state_Value)
-            
-        case .faceFullRangeSparseTrainingModelLabel:
-            print("FaceFullRangeSparseModel Download Status :", stage_state_Value)
-            
-        case .faceLandmarksDetectorTrainingModelLabel:
-            print("FaceLandmarksDetectorModel Download Status :", stage_state_Value)
-            
-        case .faceBlendshapesDetectorTrainingModelLabel:
-            print("FaceBlendshapesModel Download Status :", stage_state_Value)
-            
-        case .faceMaskTrainingModelLabel:
-            print("FaceMaskModel Download Status :", stage_state_Value)
-            
-        case .idCaptureTrainingModelLabel:
-            print("IDCaptureModel Download Status :", stage_state_Value)
-        
-        case .docDetectionTrainingModelLabel:
-            print("DocDetectModel Download Status :", stage_state_Value)
-                
-        case .focusTrainingModelLabel:
-            print("IDFocusModel Download Status :", stage_state_Value)
-            
-        case .fingerprintDetectionTrainingModelLabel:
-            print("FingerPrintModel Download Status :", stage_state_Value)
-        
-        @unknown default:
-            print("Unknown Status :", stage_state_Value)
-        }
-        
-        //2. check for completion of the stage states
-        states[stage] = state
-        if states[.login] == .downloaded &&
-            ([.ok, .downloaded].contains(states[.getXsltData])) &&
-            ([.ok, .downloaded].contains(states[.searchCompanyTemplateDetails])) &&
-            ([.ok, .downloadedFromS3].contains(states[.passiveFaceTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.focusFaceTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.faceFullRangeSparseTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.faceLandmarksDetectorTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.faceBlendshapesDetectorTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.faceMaskTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.idCaptureTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.docDetectionTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.focusTrainingModelLabel])) &&
-            ([.ok, .downloadedFromS3].contains(states[.fingerprintDetectionTrainingModelLabel])) {
-                
-                activityIndicator.stopAnimating()
-                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
-                
-            } else if states[.login] == .error || states[.getXsltData] == .error || states[.searchCompanyTemplateDetails] == .error  {
-                
-                print("!!! initialize SDK ERROR ")
-                activityIndicator.stopAnimating()
-                self.displayAlert(title: "Error", Message: "SDK initialization Error")
-                
-            }
-    }
-}
+//extension ViewController: InitializationDelegate {
+//    func updateInitialization(stage: IDentityMediumSDK.InitializationStage, state: IDentityMediumSDK.InitializationState) {
+//                
+//        //1. Debug-Purpose : Just to print information in logs
+//        let stage_state_Value = "\(stage.rawValue) \(state.rawValue)"
+//        switch stage {
+//        case .login:
+//            print("Login Status :", stage_state_Value)
+//            
+//        case .getXsltData:
+//            print("XSLT Download Status :", stage_state_Value)
+//            
+//        case .searchCompanyTemplateDetails:
+//            print("Template Download Status :", stage_state_Value)
+//            
+//        case .passiveFaceTrainingModelLabel:
+//            print("PassiveFaceModel Download Status :", stage_state_Value)
+//            
+//        case .focusFaceTrainingModelLabel:
+//            print("FaceFocusModel Download Status :", stage_state_Value)
+//            
+//        case .faceFullRangeSparseTrainingModelLabel:
+//            print("FaceFullRangeSparseModel Download Status :", stage_state_Value)
+//            
+//        case .faceLandmarksDetectorTrainingModelLabel:
+//            print("FaceLandmarksDetectorModel Download Status :", stage_state_Value)
+//            
+//        case .faceBlendshapesDetectorTrainingModelLabel:
+//            print("FaceBlendshapesModel Download Status :", stage_state_Value)
+//            
+//        case .faceMaskTrainingModelLabel:
+//            print("FaceMaskModel Download Status :", stage_state_Value)
+//            
+//        case .idCaptureTrainingModelLabel:
+//            print("IDCaptureModel Download Status :", stage_state_Value)
+//        
+//        case .docDetectionTrainingModelLabel:
+//            print("DocDetectModel Download Status :", stage_state_Value)
+//                
+//        case .focusTrainingModelLabel:
+//            print("IDFocusModel Download Status :", stage_state_Value)
+//            
+//        case .fingerprintDetectionTrainingModelLabel:
+//            print("FingerPrintModel Download Status :", stage_state_Value)
+//        
+//        @unknown default:
+//            print("Unknown Status :", stage_state_Value)
+//        }
+//        
+//        //2. check for completion of the stage states
+//        states[stage] = state
+//        if states[.login] == .downloaded &&
+//            ([.ok, .downloaded].contains(states[.getXsltData])) &&
+//            ([.ok, .downloaded].contains(states[.searchCompanyTemplateDetails])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.passiveFaceTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.focusFaceTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.faceFullRangeSparseTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.faceLandmarksDetectorTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.faceBlendshapesDetectorTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.faceMaskTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.idCaptureTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.docDetectionTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.focusTrainingModelLabel])) &&
+//            ([.ok, .downloadedFromS3].contains(states[.fingerprintDetectionTrainingModelLabel])) {
+//                
+//                activityIndicator.stopAnimating()
+//                self.performSegue(withIdentifier: "CompleteKYC_SegueID", sender: nil)
+//                
+//            } else if states[.login] == .error || states[.getXsltData] == .error || states[.searchCompanyTemplateDetails] == .error  {
+//                
+//                print("!!! initialize SDK ERROR ")
+//                activityIndicator.stopAnimating()
+//                self.displayAlert(title: "Error", Message: "SDK initialization Error")
+//                
+//            }
+//    }
+//}
 
 extension ViewController {
     

@@ -6,11 +6,9 @@ target 'MediumSDK2Sample' do
   use_frameworks!
 
   # Pods for MediumSDK2Sample
-    pod 'IDentityMediumSDK2.0'
-    pod 'IDentityMediumModels'
+    pod 'IDentityMediumSDK2.0', '11.1.13.2.3'
+    pod 'IDentityMediumModels', '11.1.13.2.3'
     pod 'GoogleMLKit/TextRecognition'
-    pod 'GZIP'
-
 end
 
 post_install do |installer|
